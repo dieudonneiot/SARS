@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriSmart - Tableau de bord agricole intelligent</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-seedling" style="font-size: 36px; color: var(--primary);"></i>
+        <h1>Agri<span>Smart</span> Dashboard</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="nav-link active" data-section="dashboard">Tableau de bord</a></li>
+          <li><a href="#" class="nav-link" data-section="history">Historique</a></li>
+          <li><a href="#" class="nav-link" data-section="recommendations">Recommandations</a></li>
+          <li><a href="#" class="nav-link" data-section="alerts">Alertes</a></li>
+          <li><a href="#" class="nav-link" data-section="settings">Paramètres</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Tableau de bord (Section principale) -->
+    <div class="section active" id="dashboard-section">
+      <div class="dashboard-grid">
+        <div class="main-section">
+          <div class="metrics-grid">
+            <!-- Azote (N) -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>Azote (N)</span>
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="nitrogen"></div>
+                <span class="metric-status" id="nitrogen-status"></span>
+                <div class="metric-info" id="nitrogen-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="nitrogen-progress"></div>
+                </div>
+                <div class="loading" id="nitrogen-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phosphore (P) -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>Phosphore (P)</span>
+                <i class="fas fa-fire"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="phosphorus"></div>
+                <span class="metric-status" id="phosphorus-status"></span>
+                <div class="metric-info" id="phosphorus-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="phosphorus-progress"></div>
+                </div>
+                <div class="loading" id="phosphorus-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Potassium (K) -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>Potassium (K)</span>
+                <i class="fas fa-bolt"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="potassium"></div>
+                <span class="metric-status" id="potassium-status"></span>
+                <div class="metric-info" id="potassium-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="potassium-progress"></div>
+                </div>
+                <div class="loading" id="potassium-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- pH -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>pH</span>
+                <i class="fas fa-vial"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="ph"></div>
+                <span class="metric-status" id="ph-status"></span>
+                <div class="metric-info" id="ph-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="ph-progress"></div>
+                </div>
+                <div class="loading" id="ph-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Conductivité -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>Conductivité</span>
+                <i class="fas fa-bolt-lightning"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="conductivity"></div>
+                <span class="metric-status" id="conductivity-status"></span>
+                <div class="metric-info" id="conductivity-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="conductivity-progress"></div>
+                </div>
+                <div class="loading" id="conductivity-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Température -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>Température</span>
+                <i class="fas fa-temperature-high"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="temperature"></div>
+                <span class="metric-status" id="temperature-status"></span>
+                <div class="metric-info" id="temperature-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="temperature-progress"></div>
+                </div>
+                <div class="loading" id="temperature-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Salinité -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>Salinité</span>
+                <i class="fas fa-water"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="salinity"></div>
+                <span class="metric-status" id="salinity-status"></span>
+                <div class="metric-info" id="salinity-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="salinity-progress"></div>
+                </div>
+                <div class="loading" id="salinity-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TDS -->
+            <div class="card metric-card">
+              <div class="card-header">
+                <span>TDS</span>
+                <i class="fas fa-flask"></i>
+              </div>
+              <div class="card-body">
+                <div class="metric-value" id="tds"></div>
+                <span class="metric-status" id="tds-status"></span>
+                <div class="metric-info" id="tds-info"></div>
+                <div class="progress-container">
+                  <div class="progress-bar" id="tds-progress"></div>
+                </div>
+                <div class="loading" id="tds-loading">
+                  <span>Chargement...</span>
+                  <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Assistant Section -->
+        <div class="assistant-section">
+          <div class="assistant-card">
+            <div class="assistant-header">
+              <div class="assistant-icon">
+                <i class="fas fa-robot"></i>
+              </div>
+              <h2>Assistant Agri IA</h2>
+            </div>
+            
+            <div class="assistant-message">
+              <p>Bonjour! Je suis votre assistant agricole intelligent. Analyse en cours des données de votre culture...</p>
+              
+              <div class="recommendations" id="ai-recommendations">
+                <h3>Recommandations pour votre culture</h3>
+                <ul id="recommendations-list">
+                  <li>Analyse des données en cours...</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="ai-input">
+              <input type="text" id="ai-question" placeholder="Posez une question à l'assistant IA...">
+              <button id="ai-submit"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Historique -->
+    <div class="section" id="history-section">
+      <div class="section-header">
+        <i class="fas fa-history"></i>
+        <h2>Historique des mesures</h2>
+      </div>
+      
+      <div class="history-grid">
+        <div class="card history-card">
+          <div class="card-header">
+            <span>Azote (N) et Phosphore (P)</span>
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="card-body">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Heure</th>
+                  <th>N (mg/kg)</th>
+                  <th>P (mg/kg)</th>
+                </tr>
+              </thead>
+              <tbody id="np-history">
+                <tr>
+                  <td colspan="3" style="text-align: center;">Chargement des données...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="card history-card">
+          <div class="card-header">
+            <span>Potassium (K) et pH</span>
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="card-body">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Heure</th>
+                  <th>K (mg/kg)</th>
+                  <th>pH</th>
+                </tr>
+              </thead>
+              <tbody id="kph-history">
+                <tr>
+                  <td colspan="3" style="text-align: center;">Chargement des données...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="card history-card">
+          <div class="card-header">
+            <span>Autres paramètres</span>
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="card-body">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Heure</th>
+                  <th>Cond. (mS/cm)</th>
+                  <th>Sal. (g/L)</th>
+                </tr>
+              </thead>
+              <tbody id="other-history">
+                <tr>
+                  <td colspan="3" style="text-align: center;">Chargement des données...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Recommandations -->
+    <div class="section" id="recommendations-section">
+      <div class="section-header">
+        <i class="fas fa-lightbulb"></i>
+        <h2>Recommandations personnalisées</h2>
+      </div>
+      
+      <div class="crop-selector-container">
+        <select id="crop-selector" class="crop-selector">
+          <option value="maize">Maïs</option>
+          <option value="rice">Riz</option>
+          <option value="soybean">Soja</option>
+          <option value="yam">Igname</option>
+          <option value="onion">Oignon</option>
+          <option value="ginger">Gingembre</option>
+          <option value="groundnut">Arachide</option>
+          <option value="tomato">Tomate</option>
+          <option value="chili">Piment</option>
+          <option value="potato">Pomme de terre</option>
+          <option value="cucumber">Concombre</option>
+          <option value="lettuce">Laitue</option>
+        </select>
+      </div>
+      
+      <div id="recommendations-container">
+        <!-- Les cartes de recommandations seront générées ici -->
+      </div>
+    </div>
+
+    <!-- Section Alertes -->
+    <div class="section" id="alerts-section">
+      <div class="section-header">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h2>Alertes en temps réel</h2>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="card alert-card">
+          <div class="card-header">
+            <span>Alertes actives</span>
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="card-body">
+            <ul class="alert-list" id="active-alerts">
+              <li class="alert-item">
+                <div class="alert-icon">
+                  <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="alert-content">
+                  <h4>Analyse des données en cours</h4>
+                  <p>Les alertes seront générées à partir des données de Firebase</p>
+                  <div class="alert-time">Chargement...</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <span>Historique des alertes</span>
+            <i class="fas fa-history"></i>
+          </div>
+          <div class="card-body">
+            <ul class="alert-list" id="alert-history">
+              <li class="alert-item">
+                <div class="alert-icon">
+                  <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                </div>
+                <div class="alert-content">
+                  <h4>Aucune alerte résolue</h4>
+                  <p>L'historique des alertes sera mis à jour automatiquement</p>
+                  <div class="alert-time">Chargement...</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Paramètres -->
+    <div class="section" id="settings-section">
+      <div class="section-header">
+        <i class="fas fa-cog"></i>
+        <h2>Paramètres du système</h2>
+      </div>
+      
+      <div class="settings-grid">
+        <div class="card">
+          <div class="card-header">
+            <span>Seuils d'alerte</span>
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Azote (N) - Seuil critique (mg/kg)</label>
+              <div class="threshold-row">
+                <span class="threshold-label">Minimal:</span>
+                <span class="threshold-value">150</span>
+              </div>
+              <div class="threshold-row">
+                <span class="threshold-label">Maximal:</span>
+                <span class="threshold-value">350</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Phosphore (P) - Seuil critique (mg/kg)</label>
+              <div class="threshold-row">
+                <span class="threshold-label">Minimal:</span>
+                <span class="threshold-value">2500</span>
+              </div>
+              <div class="threshold-row">
+                <span class="threshold-label">Maximal:</span>
+                <span class="threshold-value">4000</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Salinité - Seuil critique (g/L)</label>
+              <div class="threshold-row">
+                <span class="threshold-label">Minimal:</span>
+                <span class="threshold-value">0.2</span>
+              </div>
+              <div class="threshold-row">
+                <span class="threshold-label">Maximal:</span>
+                <span class="threshold-value">1.0</span>
+              </div>
+            </div>
+            
+            <button class="btn-save">Enregistrer les seuils</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <span>Préférences d'affichage</span>
+            <i class="fas fa-sliders-h"></i>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Fréquence de mise à jour</label>
+              <select id="update-frequency">
+                <option value="5">5 secondes</option>
+                <option value="10" selected>10 secondes</option>
+                <option value="30">30 secondes</option>
+                <option value="60">1 minute</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Nombre de valeurs dans l'historique</label>
+              <select id="history-size">
+                <option value="5">5 valeurs</option>
+                <option value="10" selected>10 valeurs</option>
+                <option value="15">15 valeurs</option>
+                <option value="20">20 valeurs</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Format de l'heure</label>
+              <select id="time-format">
+                <option value="24">24 heures (14:30)</option>
+                <option value="12">12 heures (2:30 PM)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Unité de température</label>
+              <select id="temp-unit">
+                <option value="celsius">Celsius (°C)</option>
+                <option value="fahrenheit">Fahrenheit (°F)</option>
+              </select>
+            </div>
+            
+            <button class="btn-save">Enregistrer les préférences</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <span>Notifications</span>
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Recevoir des notifications par:</label>
+              <div style="margin-top: 10px;">
+                <input type="checkbox" id="email-notif" checked>
+                <label for="email-notif" style="display: inline; margin-left: 8px;">Email</label>
+              </div>
+              <div style="margin-top: 10px;">
+                <input type="checkbox" id="push-notif" checked>
+                <label for="push-notif" style="display: inline; margin-left: 8px;">Notification push</label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Seuil de notification</label>
+              <select id="alert-level">
+                <option value="critical">Seulement critiques</option>
+                <option value="medium" selected>Moyennes et critiques</option>
+                <option value="all">Toutes les alertes</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Heures de notifications</label>
+              <div style="display: flex; gap: 15px; margin-top: 10px;">
+                <div>
+                  <label for="notif-start">De:</label>
+                  <select id="notif-start">
+                    <option>06:00</option>
+                    <option selected>08:00</option>
+                    <option>10:00</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="notif-end">À:</label>
+                  <select id="notif-end">
+                    <option>18:00</option>
+                    <option selected>20:00</option>
+                    <option>22:00</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <button class="btn-save">Enregistrer les paramètres</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>AgriSmart Dashboard &copy; 2025 | Surveillance intelligente des cultures en temps réel</p>
+    </footer>
+  </div>
+
+  <script type="module" src="cropDatabase.js"></script>
+
+  
+</body>
+</html>
