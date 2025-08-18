@@ -214,7 +214,9 @@ onValue(npkRef, snapshot => {
 
 onValue(historyRef, snapshot => {
   const data = snapshot.val();
-  if (data) updateHistory(data);
+  if (data) {
+    updateHistory(data);
+  }
 });
 
 // ==============================
@@ -225,7 +227,9 @@ const openaiApiKey = "TON_API_KEY_ICI";
 document.getElementById('ai-submit').addEventListener('click', async () => {
   const input = document.getElementById('ai-question');
   const question = input.value.trim();
-  if (!question) return;
+  if (!question) {
+    return;
+  }
 
   const recList = document.getElementById('recommendations-list');
   recList.innerHTML = '<li>Réponse en cours...</li>';
